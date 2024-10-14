@@ -1,0 +1,72 @@
+package practice.cafe;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import ch09_class.quiz.Movie;
+import ch09_class.quiz.MovieDB;
+
+public class Cafe {
+	
+	private String name;
+	private static ArrayList<Coffee> menuList = new ArrayList<Coffee>();
+	
+	private Cafe() {
+		menuList.add(new Coffee("아메리카노", "Americano", 3000));
+		menuList.add(new Coffee("카푸치노", "Cappuccino", 3500));
+		menuList.add(new Coffee("아이스티", "Iced Tea", 4000));
+	}
+	
+	private static Cafe instance = new Cafe();
+	public static Cafe getInstance() {
+		return instance;
+	}
+	public ArrayList<Coffee> getmenuList(){
+		return menuList;
+	}
+
+
+	public Cafe(String name) {
+		super();
+		this.name = name;
+	}
+
+	public Cafe(String name, ArrayList<Coffee> menuList) {
+		super();
+		this.name = name;
+		this.menuList = menuList;
+	}
+
+	@Override
+	public String toString() {
+		return "Cafe [name=" + name + ", menuList=" + menuList + "]";
+	}
+
+
+	public static void showMenu() {
+		for(int i=0; i<menuList.size(); i++) {
+			Coffee coffee = menuList.get(i);
+			System.out.println((i+1)+". ["+coffee.getKoname()+": "+coffee.getPrice()+"]");
+		}
+	}
+	
+    public static void addCoffee(Coffee cf) {
+		menuList.add(cf);
+	}
+    
+    public static void buyCoffee(Scanner sc) {
+		int usernum = Integer.parseInt(sc.nextLine())-1;
+		if(usernum<menuList.size()) {
+			Coffee coffee = menuList.get(usernum);
+			System.out.printf("%s를 %d원에 구매했습니다.\n", 
+					          coffee.getKoname(), coffee.getPrice());
+		}else {
+			System.out.println("존재하지 않는 메뉴 입니다.");
+		}
+			
+	}
+		
+
+	
+
+}
