@@ -1,0 +1,32 @@
+package practice;
+
+import java.util.Scanner;
+
+/**
+ * class Name   : Result02
+ * Author       : lsh
+ * Created Date : 2024. 8. 7.
+ * Version      : 1.0
+ * Purpose      :
+ * Description  :
+ */
+
+public class Result02 {
+
+	public static void main(String[] args) {
+		// for 문을 사용해서 10팩토리얼의 값 출력
+		
+		Scanner scan = new Scanner(System.in);
+		System.out.print("n팩토리얼(n!)의 값을 출력합니다. 정수 n을 입력해주세요:");
+		int usernum = Integer.parseInt(scan.nextLine());
+		long num = 1;
+		for(int i=usernum; i>0; i--) {
+			num *= i;
+		}
+		System.out.printf("%d 팩토리얼의 값: %d", usernum, num);
+		scan.close();
+		
+		
+		
+	}
+}
