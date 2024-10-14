@@ -1,0 +1,52 @@
+package practice;
+
+import java.util.Scanner;
+
+/**
+ * class Name   : Result03
+ * Author       : lsh
+ * Created Date : 2024. 8. 8.
+ * Version      : 1.0
+ * Purpose      :
+ * Description  :
+ */
+
+public class Result03 {
+
+	public static void main(String[] args) {
+		// Q.3 업다운 게임
+		// 1 ~ 50 사이의 랜덤 정수 생성
+		// 기회는 5번!
+		int randInt = (int) (Math.random() * 50 +1); 
+		// Math.random() <-- 난수 생성 메소드 0 ~ 1 사이 실수
+		System.out.println(randInt);
+		
+		int chance = 5;
+		Scanner scan = new Scanner(System.in);
+		
+		while(true) {
+			
+			System.out.print("숫자를 입력해주세요 :");
+			int usernum = Integer.parseInt(scan.nextLine());
+			
+			if(usernum == randInt) {
+				System.out.println("정답입니다.");
+				break;
+			}
+			
+			chance--;
+			
+			if(chance == 0) {	
+				System.out.printf("실패하였습니다. 정답은 %d입니다.", randInt);
+				break;
+			}
+			
+			if(usernum > randInt) {
+				System.out.printf("다운!! 기회가 %d번 남았습니다. \n", chance);
+			}else {
+				System.out.printf("업!! 기회가 %d번 남았습니다. \n", chance);
+			}		
+		}
+		scan.close();
+	}
+}
