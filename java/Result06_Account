@@ -1,0 +1,53 @@
+package practice.bank;
+
+/**
+ * class Name   : Account
+ * Author       : lsh
+ * Created Date : 2024. 8. 14.
+ * Version      : 1.0
+ * Purpose      :
+ * Description  :
+ */
+
+public class Account {
+	private String num;
+	private String name;
+	private int balance;
+	
+	public Account(String num, String name, int balance) {
+		super();
+		this.num = num;
+		this.name = name;
+		this.balance = balance;
+	}
+	public Account() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public String getNum() {
+		return num;
+	}
+	public void setNum(String num) {
+		this.num = num;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+	
+	@Override
+	public String toString() {
+		return "Account [num=" + num + ", name=" + name + ", balance=" + balance + "]";
+	}
+	
+	
+}
