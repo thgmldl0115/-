@@ -1,0 +1,98 @@
+package practice;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class Result05 {
+
+	public static void main(String[] args) {
+
+		ArrayList<Integer> weekLotto = null;
+		weekLotto = makeLotto();
+		System.out.println(weekLotto.toString());
+
+		ArrayList<Integer> weekLotto2 = null;
+		String[] numArr = { "1", "5" };
+		weekLotto2 = makeLotto(numArr);
+		System.out.println(weekLotto2.toString());
+		
+		Scanner scan = new Scanner(System.in);
+		while (true) {
+			System.out.println("==================================================");
+			System.out.println("행운의 로또 번호 생성기 입니다.");
+			System.out.println("입력 값이 있으면 'y', 전체 자동으로 선택하려면 'n'을 선택하세요. (종료 q)>>>");
+			String user = scan.nextLine();
+			if (user.equalsIgnoreCase("q")) {
+				System.out.println("로또 번호 생성기를 종료합니다.");
+				break;
+			}
+			if (user.equals("y")) {
+				System.out.println("번호를 한칸씩 띄어서 입력해주세요 최대 6개");
+				String usernum = scan.nextLine();
+				String[] num = usernum.split(" ");
+				if (num.length>6) {
+					System.out.println("번호는 최대 6개만 입력 가능합니다!");
+					continue;
+				}
+				System.out.println("선택하신 번호는");
+				for(int i=0; i<num.length; i++) {
+					if(i==num.length-1) {
+						System.out.println(num[i]);
+						break;
+					}
+					System.out.print(num[i]+", ");
+				}
+				System.out.println("이번주 행운의 번호는 ♥");
+				ArrayList<Integer> weekLotto4 = null;
+				weekLotto4 = makeLotto(num);
+				System.out.println(weekLotto4.toString());
+				System.out.println("GOOD LUCK ♥");
+			} else if (user.equals("n") ) {
+				System.out.println("이번주 행운의 번호는 ♥");
+				ArrayList<Integer> weekLotto3 = null;
+				weekLotto3 = makeLotto();
+				System.out.println(weekLotto3.toString());
+				System.out.println("GOOD LUCK ♥");
+			} else {
+				System.out.println("'y'또는 'n'을 입력해주세요!");
+			}
+		}
+		scan.close();
+	}
+
+	private static ArrayList<Integer> makeLotto() {
+		ArrayList<Integer> result = new ArrayList<>();
+		HashSet<Integer> lottonum = new HashSet<>();
+		while (lottonum.size() < 6) {
+			int randIdx = (int) (Math.random() * 45) + 1;
+			lottonum.add(randIdx);
+		}
+		for(int num : lottonum) {
+			result.add(num);
+		}
+		Collections.sort(result);
+		
+		return result;
+	}
+	
+	private static ArrayList<Integer> makeLotto(String[] strArr) {
+		ArrayList<Integer> result = new ArrayList<>();
+		HashSet<Integer> lottonum = new HashSet<>();
+		for(int i=0; i<strArr.length; i++) {
+			lottonum.add(Integer.parseInt(strArr[i]));
+		}
+		while (lottonum.size() < 6) {
+			int randIdx = (int) (Math.random() * 45) + 1;
+			lottonum.add(randIdx);
+		}
+		for(int num : lottonum) {
+			result.add(num);
+		}
+		Collections.sort(result);
+		
+		return result;
+	}
+	
+}
