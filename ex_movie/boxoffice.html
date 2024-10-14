@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 데이터 조회</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        // 고유키니까 인터넷에 공유하지 마세요! 
+        const key = "a8bc60af22f46c64f62b3facdb06ab78";
+
+        // let ajax = new XMLHttpRequest(); // 비동기 통신을 지원하는 객체
+
+        window.onload = function () {
+            document.getElementById('movieForm').addEventListener('submit', function (e) {
+                let url_temp = `https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${key}&targetDt=${targetDt}`;
+                var ajax = new XMLHttpRequest();
+                ajax.open("GET", url_temp, true);
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        var movies = JSON.parse(ajax.responseText);
+                        console.log(movies);
+                        let arr = movies['boxOfficeResult']['dailyBoxOfficeList'];
+                        let str = '';
+                        for (let i = 0; i < arr.length; i++) {
+                            let v = arr[i];
+
+                            str += '<tr>';
+                            str += '<td>' + v['rank'] + '</td>';
+                            str += '<td>' + v['movieNm'] + '</td>';
+                            str += '<td>' + v['openDt'] + '</td>';
+                            str += '<td>' + v['salesAmt'] + '</td>';
+                            str += '<td>' + v['audiCnt'] + '</td>';
+                            str += '<td>' + v['salesAcc'] + '</td>';
+                            str += '<td>' + v['audiAcc'] + '</td>';
+                            str += '</tr>';
+                        }
+                        document.getElementById('movieTable').style = 'block';
+                        document.getElementById('movieTable').innerHTML = str;
+                    }
+                };
+
+                e.preventDefault(); // 디폴트 행동 취소
+                let dateInput = document.getElementById('dateInput').value;
+                console.log(dateInput);
+                let selectDate = new Date(dateInput);
+                let today = new Date();
+                today.setHours(0, 0, 0, 0); // 시간부분 제거
+                if (selectDate > today) {
+                    alert("오늘 날짜 이전의 날짜만 선택가능!");
+                    return;
+                }
+                // console.log("요청!");
+                // let targetDt = dateInput.replaceAll('-', '');
+                // // let url_temp = `https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${key}&targetDt=${targetDt}`;
+                // console.log(url_temp);
+
+                // fn_get('', main);
+
+
+
+                // movieTable.style.display = 'block';
+
+                // function fn_get(code, func) {
+                //     if (code == '') {
+                //         ajax.open('GET', url_temp, true);
+                //     }
+                //     ajax.onreadystatechange = func;
+                //     ajax.send();  // 요청!
+                // }
+
+                // function main() {
+                //     if (ajax.readyState == 4 && ajax.status == 200) {
+
+                //         let arr = JSON.parse(ajax.responseText);
+
+                //         let str = '';
+                //         console.log(arr);
+                //         console.log(arr[dailyBoxOfficeList]);
+
+                //         for (let i = 0; i < arr.length; i++) {
+                //             // var keys = Object.keys(arr[i]);
+                //             str += '<tr>';
+                //             // for(var j=0; j<keys.length; j++){
+                //             // var key = keys[i];
+
+                //             str += '<td>' + arr + '</td>';
+                //             str += '<td>' + arr[0][key] + '</td>';
+                //             // }
+                //             str += '</tr>';
+                //         }
+
+
+                //         console.log(str);
+
+                //         document.getElementById('movieTable').innerHTML = str;
+
+                //     }
+                // };
+
+            })
+        }
+
+
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>영화 데이터 조회</h2>
+        <form id="movieForm">
+            <label for="dateInput">날짜 입력 (YYYY-MM-DD): </label>
+            <input type="date" id="dateInput" required>
+            <button type="submit">조회</button>
+        </form>
+
+        <table id="movieTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th>순위</th>
+                    <th>영화 제목</th>
+                    <th>개봉일</th>
+                    <th>당일 매출액</th>
+                    <th>당일 관객수</th>
+                    <th>누적 매출액</th>
+                    <th>누적 관객수</th>
+                </tr>
+            </thead>
+            <tbody id="movieTableBody">
+                <!-- 데이터가 여기에 추가됩니다 -->
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

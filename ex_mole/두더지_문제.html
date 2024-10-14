@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>두더지 게임</title>
+    <style> .game-board { width: 600px; height: 600px; position: relative;}
+            .mole { width: 100px; height: 100px; 
+                    position: absolute;
+                    display: none;
+                    }
+            .mole:hover { cursor: pointer;}
+            .mole:active {opacity: 0.5;}
+    </style>
+</head>
+<body>
+ 
+
+    <h1>점수 : <span id="score">0</span></h1>
+    <h1>남은시간: <span id="time">30</span></h1>
+    <div class="game-board">
+        <img src="두더지.PNG" class="mole" id="mole" alt="" onclick="fn_click()">
+    </div>
+       <!--
+        1. 일정 시간마다 나타나게  showMole() 함수
+          - 이미지의.style.display 를 block으로
+        2. 사라지게               hideMole() 함수
+          - 이미지의.style.display 를 none으로
+        3. 랜덤한 위치            randomPosition() 함수
+          - 이미지의.style.left
+          - 이미지의.style.top을 랜덤하게 변경
+        4. 점수 계산 (클릭이벤트) & 시간감소
+          - 이미지를 클릭했을때 점수증가
+          - 1초마다 시간 감소
+    -->
+    <script>
+        let before = new Date();
+        let beforetime = Math.ceil(before.getTime()/1000); 
+        // let after = new Date();
+        // let aftertime = Math.ceil(after.getTime()/1000);
+
+        let score = 0;     // 게임점수
+        let time = 30;      // 시간
+        let gameInterval;  // 특정시간마다 반복시킬
+        let secTime = 0;
+
+        function showMole(){
+           let mole = document.getElementById('mole');
+           mole.style.display='block';
+        }
+        function hideMole(){
+           let mole = document.getElementById('mole');
+           mole.style.display='none';
+        }
+        function randomPosition(){
+           let mole = document.getElementById('mole');
+           mole.style.left=Math.random()*500+"px";
+           mole.style.top=Math.random()*500+"px";
+        }
+             
+        function fn_click(){
+           let scorenum = document.getElementById('score');
+           score += 1;
+           scorenum.innerHTML = score;
+        }
+        
+        function disclick(){
+            let gametime = document.getElementById('time');
+            let after = new Date();
+            let aftertime = Math.ceil(after.getTime()/1000);
+            // after = new Date();
+            // aftertime = Math.ceil(after.getTime()/1000);
+            secTime = aftertime - beforetime;
+            if(time - secTime == 0){
+                alert("Game Over. 최종 점수:"+score);
+            }
+            gametime.innerHTML = time - secTime;
+        }
+
+        window.onload = function(){
+            setInterval(showMole, 1000); 
+            setInterval(hideMole, 2000);
+            setInterval(randomPosition, 1000); 
+            setInterval(disclick, 1000);
+        //     interver1 = setInterval(showMole, 1000); 
+        //     interver2 = setInterval(hideMole, 2000);
+        //     interver3 = setInterval(randomPosition, 1000); 
+        //     interver4 = setInterval(disclick, 1000);
+        //    if(time - secTime == 0){
+        //     clearInterval(interver1);
+        //     clearInterval(interver2);
+        //     clearInterval(interver3);
+        //     clearInterval(interver4);
+        //    }
+        }
+
+           
+    </script>
+</body>
+</html>

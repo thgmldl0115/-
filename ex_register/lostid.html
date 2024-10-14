@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기</title>
+    <script>
+        function fn_findid(){
+            let val = localStorage.getItem(userId.value);
+            if(val == null){
+                alert("입력하신 이름은 회원내역에 존재하지 않습니다.");
+                item.value = "";
+                item.focus();
+            }else{
+                alert(item.value + " 님의 아이디는 "+ val + "입니다.");
+            }
+        }
+        function fn_close(){
+                window.close();
+            }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h1>아이디 찾기</h1>
+        <form action="#">
+            <ul id="user-info">
+                <label for="user-name" class="field">이름</label>
+                <input type="text" name="" id="user-name" placeholder="이름을 입력해주세요" required>
+                <button type="button" onclick="fn_findid()">아이디찾기</button></li>
+            </ul>
+            <ul><button type="button" onclick="fn_close()">닫기</button></ul>
+        </form>
+    </div>
+</body>
+</html>
