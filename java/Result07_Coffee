@@ -1,0 +1,50 @@
+package practice.cafe;
+
+public class Coffee {
+	
+	private String koname;
+	private String egname;
+	private int price;
+	
+	public Coffee() {
+		super();
+		this.koname = "커피";
+		this.egname = "coffee";
+		this.price = 1000;
+	}
+
+	public Coffee(String koname, String egname, int price) {
+		super();
+		this.koname = koname;
+		this.egname = egname;
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Coffee [koname=" + koname + ", egname=" + egname + ", price=" + price + "]";
+	}
+
+	
+	
+	public String getKoname() {
+		return koname;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public String getEgname() {
+		return egname;
+	}
+
+
+
+
+
+
+
+	
+
+}
