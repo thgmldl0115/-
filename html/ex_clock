@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* *은 전체 */
+        * { text-align: center; position: relative; top: 50px;}    
+        body {background-color: black;}
+        #date{ font-size: 30px; color: blue;}
+        #time{font-size: 40px; color: purple;}
+        h3{font-size:60px;  color: whitesmoke;}
+    </style>
+    <script>
+            function fn_setClock(){
+                let now = new Date();
+                let nowtime_HH = fn_set(now.getHours());
+                let nowtime_MM = fn_set(now.getMinutes());
+                let nowtime_DD = fn_set(now.getSeconds());
+
+                let nowdate_YYYY = fn_set(now.getFullYear());
+                let nowdate_MM = fn_set((now.getMonth()+1));
+                let nowdate_DD = fn_set(now.getDate());
+ 
+                document.getElementById("time").innerHTML = nowtime_HH+":"+nowtime_MM+":"+nowtime_DD;
+                document.getElementById("date").innerHTML = nowdate_YYYY+"년 "+nowdate_MM+"월 "+nowdate_DD+"일";
+                // 예시 
+                // document.getElementById("date").innerHTML = now.toString();
+                //------ 오늘의 문제 -------
+                //date 쪽은 YYYY년 MM월 DD일 
+                //time 쪽은 HH:MM:DD  로 출력하시오 
+                //만약 1월이라면 01로 출력, 1초라면 01로 출력
+
+                function fn_set(num){
+                    if(num<10) {
+                        num="0"+num;
+                    }
+                    return num;
+                }
+            }
+            //브라우저에서 화면을 다 로드한뒤 
+            window.onload = function(){
+                // setInterval은 반복적으로 어떤 기능을 실행야 할때 사용.
+                // 첫번째 매개변수는 함수, 두번째 매개변수는 반복 시간 1000 <--1초
+                fn_setClock();                   // 로드 되자마자 한번 출력 
+                setInterval(fn_setClock, 1000);  // 1초 후마다 출력
+            }
+    </script>
+</head>
+<body>
+    <h3>메인화면</h3>
+    <div id="time"></div>
+    <div id="date"></div>
+</body>
+</html>
