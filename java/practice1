@@ -1,0 +1,74 @@
+package practice;
+
+import java.util.Scanner;
+
+/**
+ * class Name   : Result01
+ * Author       : lsh
+ * Created Date : 2024. 8. 6.
+ * Version      : 1.0
+ * Purpose      :
+ * Description  :
+ */
+public class Result01 {
+	/*
+	 * q1. 사용자로부터 국어, 영어, 수학 점수를 각각 입력받아 평균점수를 구하고, 
+	 *     등급을 출력해주세요.
+	 * 등급조건 : 평균점수가 90점 이상이면 A, 80점 이상 B, 70점 이상 C, 나머지 D
+	 */
+	public static void main(String[] args) {
+		// 1. 입력을 받고
+        Scanner scan = new Scanner(System.in);
+        System.out.print("국어 점수 입력 >>");
+        String korean = scan.nextLine();
+        System.out.print("영어 점수 입력 >>");
+        String english = scan.nextLine();
+        System.out.print("수학 점수 입력 >>");
+        String math = scan.nextLine();
+        
+        int intKor = Integer.parseInt(korean);
+        int intEng = Integer.parseInt(english);
+        int intMath = Integer.parseInt(math);
+        
+        //2. 입력받아서 평균 계산
+        double avg = (intEng + intKor + intMath) / 3.0;
+        //3. 조건식
+        String grade = "";
+        if(avg>=90) {
+        	grade = "A";
+        }else if(avg >= 80) {
+        	grade = "B";
+        }else if(avg >= 70) {
+        	grade = "C";
+        }else {
+        	grade = "D";
+        }
+        //4. 출력
+        System.out.println("평균 :" + avg);
+        System.out.println("등급 :" + grade);
+        
+
+//		Scanner scan = new Scanner(System.in);
+//		System.out.println("국어 점수를 입력해주세요. \n>>>");
+//		int score1 = Integer.parseInt(scan.nextLine());
+//		System.out.println("영어 점수를 입력해주세요. \n>>>");
+//		int score2 = Integer.parseInt(scan.nextLine());
+//		System.out.println("수학 점수를 입력해주세요. \n>>>");
+//		int score3 = Integer.parseInt(scan.nextLine());
+//		
+//		if((score1 + score2 + score3) / 3.0 >= 90) {
+//			System.out.printf("평균 : %f \n등급 : %s 등급", (score1 + score2 + score3) / 3.0, "A");
+//		}else if((score1 + score2 + score3) / 3.0 >= 80) {
+//			System.out.printf("평균 : %f \n등급 : %s 등급", (score1 + score2 + score3) / 3.0, "B");
+//		}else if((score1 + score2 + score3) / 3.0 >= 70) {
+//			System.out.printf("평균 : %f \n등급 : %s 등급", (score1 + score2 + score3) / 3.0, "C");
+//		}else {
+//			System.out.printf("평균 : %f \n등급 : %s 등급", (score1 + score2 + score3) / 3.0, "D");
+//		}
+//		scan.close();
+		
+
+
+	}
+
+}
