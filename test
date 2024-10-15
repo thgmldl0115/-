@@ -19,3 +19,16 @@ CREATE TABLE members (
 
 SELECT * FROM members;
 ```
+
+```
+CREATE TABLE members (
+     mem_id VARCHAR2(50) PRIMARY KEY
+    ,mem_pw VARCHAR2(1000) NOT NULL
+    ,mem_nm VARCHAR2(100)
+    ,mem_addr VARCHAR2(1000)
+    ,profile_img VARCHAR2(1000)
+    ,use_yn VARCHAR2(1) DEFAULT 'Y'
+    ,update_dt DATE DEFAULT SYSDATE
+    ,create_dt DATE DEFAULT SYSDATE
+);
+```
