@@ -1,3 +1,4 @@
+oracle 계정 생성
 ```
 -- 계정 생성 (DBA 권한 있는 계정에서 실행)
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
@@ -8,6 +9,7 @@ GRANT UNLIMITED TABLESPACE to jdbc;
 
 ```
 
+테이블 생성
 ```
 CREATE TABLE members (
      mem_id VARCHAR2(50) PRIMARY KEY
@@ -21,4 +23,27 @@ CREATE TABLE members (
 );
 
 SELECT * FROM members;
+```
+
+Python - oracle 연결
+```
+# pip install cx_Oracle
+import cx_Oracle
+conn = cx_Oracle.connect("member", "member", "localhost:1521/xe")
+print(conn.version)
+sql = """
+        SELECT *
+        FROM member
+        WHERE mem_name LIKE '%' || :word || '%'
+"""
+while True:
+    nm = input("검색하고 싶은 고객명 입력 (종료q) : ")
+    if nm == 'q':
+        break
+    d = {"word":nm}
+    with conn:
+        cur = conn.cursor()
+        rows = cur.execute(sql, d)
+        for row in rows:
+            print(row)
 ```
